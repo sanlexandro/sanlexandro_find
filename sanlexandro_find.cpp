@@ -11,13 +11,9 @@ void setFirstComandElement(const String& first_comand_element){ _first_comand_el
 String _array_cpaser = ",";
 void setArrayCpaser(const String& array_cpaser){ _array_cpaser = array_cpaser;}
 
-/*
-void tryme(){
-  String **memory;
-  memory = malloc(_memory_size * sizeof(String*));
-  memory[0] = malloc(2 * sizeof(String));
-}
-*/
+bool _memory_save = false;
+void setMemorySave(const bool& memory_save){ _memory_save = memory_save;}
+void getMemory(String *memory_array, const byte &memory_size){ for (byte i; i < memory_size; i++){memory_array[i] = "error";}}
 
 String get_comand(String data, String find){ //  Функция для нахождения команд в строке
   while (not(data.startsWith(_first_comand_element)) and (data.length() > 0)) data.remove(0, 1); //  Пока строка не начинается со стартого символа команды, удаляем первый символ
@@ -40,17 +36,34 @@ Data::Data (const String& data_string){ // Обозначаем класс и п
   _data_string = data_string;
 }
 
-int Data::findInt(const String& comand){ // функция нахождения команды в строке, возвращает int
-  return get_comand(_data_string, comand).toInt();
+int Data::findInt(const String& comand, String* cell = NULL){ // функция нахождения команды в строке, возвращает int
+  String buf = get_comand(_data_string, comand);
+
+  if ((_memory_save == true) and (*cell != NULL)){
+    if (buf != "error"){ *cell = buf;}
+    buf = *cell;
+  }
+  return buf.toInt();
 }
 
-String Data::findString(const String& comand){ // функция нахождения команды в строке, возвращает string
-  return get_comand(_data_string, comand);
+String Data::findString(const String& comand, String* cell = NULL){ // функция нахождения команды в строке, возвращает string
+  String buf = get_comand(_data_string, comand);
+
+   if ((_memory_save == true) and (*cell != NULL)){
+    if (buf != "error"){ *cell = buf;}
+    buf = *cell;
+  }
+  return buf;
 }
 
-bool Data::findBool(const String& comand){
+bool Data::findBool(const String& comand, String* cell = NULL){
   String buf = get_comand(_data_string, comand);
   buf.toLowerCase();
+  if (_memory_save == true){
+    if ((buf != "error") and (*cell != NULL)){ *cell = buf;}
+    else {buf = *cell;}
+  } 
+
   if ((buf == "true") or (buf == "1")){ return true;}
   else if ((buf == "false") or (buf == "0")){ return false;}
 }

@@ -10,9 +10,9 @@ class Data {
   public:
     Data(const String& data_string);
 
-    int findInt(const String& comand);
-    String findString(const String& comand);
-    bool findBool(const String& comand);
+    int findInt(const String& comand, String* cell = NULL);
+    String findString(const String& comand, String* cell = NULL);
+    bool findBool(const String& comand, String* cell = NULL);
 
   private:
     String _data_string;
@@ -21,3 +21,7 @@ class Data {
 void setFirstComandElement(const String& first_comand_element);
 
 void setArrayCpaser(const String& array_cpaser);
+
+void setMemorySave(const bool& memory_save);
+
+void getMemory(String* memory_array, const byte& memory_size);
