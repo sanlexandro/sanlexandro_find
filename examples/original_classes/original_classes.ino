@@ -33,6 +33,14 @@ void setup() {
   test = Data("#example:10!example:70");
 
   Serial.println(test.findString("#example:")); // вернёт "10!example:70" так как все команды должны начинаться с ЕДИНОГО элемента
+
+  test = Data("#bool_1:TrUe #bool_2:1 #bool_3:False #bool_4:0");// передавать bool можно как угодно
+
+  for (int i = 1; i < 5; i++){
+    Serial.print ("#bool_" + String(i) + ":  ");
+    if (test.findBool("#bool_" + String(i) + ":") == true){Serial.println("true");}
+    else {Serial.println("false");}
+  }
 }
 
 void loop() {
