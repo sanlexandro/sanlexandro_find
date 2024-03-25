@@ -8,17 +8,25 @@
 
 class Data {
   public:
-    Data(String data_string);
+    Data(const String& data_string);
 
-    int findInt(String comand);
-    String findString(String comand);
+    int findInt(const String& comand);
+    String findString(const String& comand);
+    bool findBool(const String& comand);
     
-    int findIntArrayElement (String comand, int array_size, int index);
-    String findStringArrayElement (String comand, int array_size, int index);
+    //int findIntArrayElement (const String& comand, int array_size, int index);
+    //String findStringArrayElement (const String& comand, int array_size, int index);
+
   private:
     String _data_string;
 };
 
-void setFirstComandElement(String first_comand_element);
+void setFirstComandElement(const String& first_comand_element);
 
-void setarrayCpaser(String array_cpaser);
+void setArrayCpaser(const String& array_cpaser);
+
+void setErrorMessage(const String& error_message, const String& Class);
+
+void setMemorysave(bool memory_save);
+
+void setMemorysize(const int memory_size);
