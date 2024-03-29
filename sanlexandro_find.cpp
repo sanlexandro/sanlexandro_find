@@ -1,6 +1,6 @@
 /* 
   библиотека написанна sanlexandro 
-  v1.0 от 12 декабря 2023г.
+  v1.1 от 29 марта 2024г.
 */
 #include "WString.h"
 #include "sanlexandro_find.h"
