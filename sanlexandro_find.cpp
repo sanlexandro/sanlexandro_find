@@ -89,3 +89,11 @@ void Data::findStringArray(const String &comand, String* array, const int &array
     array[i] = get_array_element(buf);
   }
 }
+
+void Data::findIntArray(const String &comand, int* array, const int &array_lenth, String* cell = NULL){
+  String buf = get_comand(_data_string, comand);
+  buf.remove(0, 2); buf.remove(buf.length()-1);
+  for (int i = 0; i < array_lenth; i++){
+    array[i] = get_array_element(buf).toInt();
+  }
+}

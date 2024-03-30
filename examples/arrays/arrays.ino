@@ -3,13 +3,18 @@
 void setup() {
   Serial.begin(9600);
 
-  String array[8];
+  String string_array[8];
   Data test("!array:[1,2,3,4,5,6,7,8]");
-  Serial.println(test.findString("!array:"));
-  test.findStringArray("!array", array, 8);
-  
+
+  test.findStringArray("!array", string_array, 8);
   for (int i=0; i < 8; i++){
-    Serial.println(array[i]);
+    Serial.println(string_array[i]);
+  }
+
+  int int_array[8];
+  test.findIntArray("!array", int_array, 8);
+  for (int i=0; i < 8; i++){
+    Serial.println(int_array[i] + 20);
   }
 }
 
