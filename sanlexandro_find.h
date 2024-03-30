@@ -24,6 +24,8 @@ void setFirstComandElement(const String& first_comand_element);
 
 void setArrayCpaser(const String& array_cpaser);
 
+void setArrayEdge(const String& array_edge);
+
 void setMemorySave(const bool& memory_save);
 
 void getMemory(String* memory_array, const byte& memory_size);

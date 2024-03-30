@@ -12,6 +12,9 @@ void setFirstComandElement(const String& first_comand_element){ _first_comand_el
 String _array_cpaser = ",";
 void setArrayCpaser(const String& array_cpaser){ _array_cpaser = array_cpaser;}
 
+String _array_edge = "[";
+void setArrayEdge(const String& array_edge){ _array_edge = array_edge;}
+
 bool _memory_save = false;
 void setMemorySave(const bool& memory_save){ _memory_save = memory_save;}
 void getMemory(String *memory_array, const byte &memory_size){ for (byte i; i < memory_size; i++){memory_array[i] = "error";}}
@@ -91,7 +94,7 @@ void Data::findStringArray(const String &comand, String* array, const int &array
     buf = *cell;
   }
 
-  while (buf.startsWith("[") or buf.startsWith(" ")){buf.remove(0, 1);}
+  while (buf.startsWith(_array_edge) or buf.startsWith(" ")){buf.remove(0, 1);}
   buf.remove(buf.length()-1);
   for (int i = 0; i < array_lenth; i++){
     array[i] = get_array_element(buf);
@@ -106,7 +109,7 @@ void Data::findIntArray(const String &comand, int* array, const int &array_lenth
     buf = *cell;
   }
 
-  while (buf.startsWith("[") or buf.startsWith(" ")){buf.remove(0, 1);}
+  while (buf.startsWith(_array_edge) or buf.startsWith(" ")){buf.remove(0, 1);}
   buf.remove(buf.length()-1);
   for (int i = 0; i < array_lenth; i++){
     array[i] = get_array_element(buf).toInt();
