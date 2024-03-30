@@ -33,6 +33,19 @@ String get_comand(String data, String find){ //  Функция для нахо�
   return result;  //  Возвращаем результат
 }
 
+String get_array_element(String& data){
+  if (data.length() > 0){
+    String result;
+    while (not(data.startsWith(_array_cpaser)) and data.length() > 0) {
+      result += data[0];
+      data.remove(0, 1);
+    }
+    data.remove(0, 1);
+    return result;
+  }
+  return "error";
+}
+
 Data::Data (const String& data_string){ // Обозначаем класс и принимаемые данные
   _data_string = data_string;
 }
@@ -71,20 +84,8 @@ bool Data::findBool(const String& comand, String* cell = NULL){
 
 void Data::findStringArray(const String &comand, String* array, const int &array_lenth, String* cell = NULL){
   String buf = get_comand(_data_string, comand);
-  buf.remove(0, 2);
-  buf.remove(buf.length()-1);
-  Serial.print("func "); Serial.println(buf);
-  while (buf.length() > 0){
-      for (int i = 0; i < array_lenth; i++){
-        String append;
-        while (not(buf.startsWith(_array_cpaser)) and buf.length() > 0) {
-          append += buf[0];
-          Serial.print("func_buf "); Serial.println(buf);
-          buf.remove(0, 1);
-        }
-        buf.remove(0, 1);
-        Serial.print("func_arr "); Serial.println(append);
-        array[i] = append;
-    }
+  buf.remove(0, 2); buf.remove(buf.length()-1);
+  for (int i = 0; i < array_lenth; i++){
+    array[i] = get_array_element(buf);
   }
 }
