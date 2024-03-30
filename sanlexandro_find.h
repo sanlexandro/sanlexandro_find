@@ -13,6 +13,7 @@ class Data {
     int findInt(const String& comand, String* cell = NULL);
     String findString(const String& comand, String* cell = NULL);
     bool findBool(const String& comand, String* cell = NULL);
+    void findStringArray(const String& comand, String* array, const int &array_lenth, String* cell = NULL);
 
   private:
     String _data_string;

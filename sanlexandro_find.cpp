@@ -1,3 +1,4 @@
+#include "HardwareSerial.h"
 /* 
   библиотека написанна sanlexandro 
   v1.2 от 29 марта 2024г.
@@ -66,4 +67,24 @@ bool Data::findBool(const String& comand, String* cell = NULL){
 
   if ((buf == "true") or (buf == "1")){ return true;}
   else if ((buf == "false") or (buf == "0")){ return false;}
+}
+
+void Data::findStringArray(const String &comand, String* array, const int &array_lenth, String* cell = NULL){
+  String buf = get_comand(_data_string, comand);
+  buf.remove(0, 2);
+  buf.remove(buf.length()-1);
+  Serial.print("func "); Serial.println(buf);
+  while (buf.length() > 0){
+      for (int i = 0; i < array_lenth; i++){
+        String append;
+        while (not(buf.startsWith(_array_cpaser)) and buf.length() > 0) {
+          append += buf[0];
+          Serial.print("func_buf "); Serial.println(buf);
+          buf.remove(0, 1);
+        }
+        buf.remove(0, 1);
+        Serial.print("func_arr "); Serial.println(append);
+        array[i] = append;
+    }
+  }
 }
