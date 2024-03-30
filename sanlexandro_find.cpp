@@ -33,8 +33,9 @@ String get_comand(String data, String find){ //  Функция для нахо�
   return result;  //  Возвращаем результат
 }
 
-String get_array_element(String& data){
-  if (data.length() > 0){
+String get_array_element(String& data){ // функция для массивов
+  if (data.length() > 0){ // тут всё аналогично, как в get_comand
+    while (data.startsWith(" ")){data.remove(0, 1);}
     String result;
     while (not(data.startsWith(_array_cpaser)) and data.length() > 0) {
       result += data[0];
@@ -63,7 +64,7 @@ int Data::findInt(const String& comand, String* cell = NULL){ // функция 
 String Data::findString(const String& comand, String* cell = NULL){ // функция нахождения команды в строке, возвращает string
   String buf = get_comand(_data_string, comand);
 
-   if ((_memory_save == true) and (*cell != NULL)){
+  if ((_memory_save == true) and (*cell != NULL)){
     if (buf != "error"){ *cell = buf;}
     buf = *cell;
   }
@@ -84,7 +85,14 @@ bool Data::findBool(const String& comand, String* cell = NULL){
 
 void Data::findStringArray(const String &comand, String* array, const int &array_lenth, String* cell = NULL){
   String buf = get_comand(_data_string, comand);
-  buf.remove(0, 2); buf.remove(buf.length()-1);
+
+  if ((_memory_save == true) and (*cell != NULL)){
+    if (buf != "error"){ *cell = buf;}
+    buf = *cell;
+  }
+
+  while (buf.startsWith("[") or buf.startsWith(" ")){buf.remove(0, 1);}
+  buf.remove(buf.length()-1);
   for (int i = 0; i < array_lenth; i++){
     array[i] = get_array_element(buf);
   }
@@ -92,7 +100,14 @@ void Data::findStringArray(const String &comand, String* array, const int &array
 
 void Data::findIntArray(const String &comand, int* array, const int &array_lenth, String* cell = NULL){
   String buf = get_comand(_data_string, comand);
-  buf.remove(0, 2); buf.remove(buf.length()-1);
+
+  if ((_memory_save == true) and (*cell != NULL)){
+    if (buf != "error"){ *cell = buf;}
+    buf = *cell;
+  }
+
+  while (buf.startsWith("[") or buf.startsWith(" ")){buf.remove(0, 1);}
+  buf.remove(buf.length()-1);
   for (int i = 0; i < array_lenth; i++){
     array[i] = get_array_element(buf).toInt();
   }
